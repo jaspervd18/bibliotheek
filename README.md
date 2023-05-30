@@ -1,3 +1,3 @@
-# Bbibliotheek
+# Bibliotheek
 
 Spring application for EWDJ
