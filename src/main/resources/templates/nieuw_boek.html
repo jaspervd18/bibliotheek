@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nieuw Boek</title>
+    <link th:href="@{/main.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>Nieuw boek</h1>
+        <a th:href="@{/}">Terug naar catalogus</a>
+      </header>
+
+      <form
+        action="#"
+        th:action="@{/saveBoek}"
+        th:object="${boek}"
+        method="POST"
+        class="nieuw-boek"
+      >
+        <label for="titel">Titel</label>
+        <input type="text" placeholder="Titel" th:field="*{titel}" id="titel" />
+
+        <label for="auteur1">Auteur 1</label>
+        <div>
+          <input
+            type="text"
+            th:field="*{auteurs[0].voornaam}"
+            placeholder="Voornaam auteur 1"
+          />
+          <input
+            type="text"
+            th:field="*{auteurs[0].naam}"
+            placeholder="Achternaam auteur 1"
+          />
+        </div>
+        <!-- <label for="auteur2">Auteur 2</label>
+        <div>
+          <input
+            type="text"
+            th:field="*{auteurs[1].voornaam}"
+            placeholder="Voornaam auteur 2"
+          />
+          <input
+            type="text"
+            th:field="*{auteurs[1].naam}"
+            placeholder="Achternaam auteur 2"
+          />
+        </div> -->
+        <!-- <label for="auteur3">Auteur 3</label>
+        <div>
+          <input
+            type="text"
+            th:field="*{auteurs[2].voornaam}"
+            placeholder="Voornaam auteur 3"
+          />
+          <input
+            type="text"
+            th:field="*{auteurs[2].naam}"
+            placeholder="Achternaam auteur 3"
+          />
+        </div> -->
+
+        <label for="isbn">ISBN</label>
+        <input type="text" placeholder="ISBN" th:field="*{isbn}" id="isbn" />
+
+        <label for="aankoopPrijs">Aankoopprijs</label>
+        <input
+          type="number"
+          placeholder="Aankoopprijs"
+          th:field="*{aankoopPrijs}"
+          id="aankoopPrijs"
+          min="0"
+          step="0.01"
+        />
+
+        <!-- <label for="locaties">Locaties</label>
+        <div>
+          <input
+            type="number"
+            th:field="*{locaties[0].code1}"
+            placeholder="Code 1"
+          />
+          <input
+            type="text"
+            th:field="*{locaties[0].code2}"
+            placeholder="Code 2"
+          />
+          <input
+            type="text"
+            th:field="*{locaties[0].plaatsnaam}"
+            placeholder="Plaatsnaam"
+          />
+        </div>
+        <div>
+          <input
+            type="number"
+            th:field="*{locaties[1].code1}"
+            placeholder="Code 1"
+          />
+          <input
+            type="text"
+            th:field="*{locaties[1].code2}"
+            placeholder="Code 2"
+          />
+          <input
+            type="text"
+            th:field="*{locaties[1].plaatsnaam}"
+            placeholder="Plaatsnaam"
+          />
+        </div>
+        <div>
+          <input
+            type="number"
+            th:field="*{locaties[2].code1}"
+            placeholder="Code 1"
+          />
+          <input
+            type="text"
+            th:field="*{locaties[2].code2}"
+            placeholder="Code 2"
+          />
+          <input
+            type="text"
+            th:field="*{locaties[2].plaatsnaam}"
+            placeholder="Plaatsnaam"
+          />
+        </div> -->
+
+        <button type="submit">Maak nieuw boek aan</button>
+      </form>
+    </div>
+  </body>
+</html>

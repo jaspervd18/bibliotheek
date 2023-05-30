@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Bibliotheek</title>
+    <link th:href="@{/main.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>Bibliotheek</h1>
+        <a th:href="@{/toonMeestFavorieteBoeken}">Meest popularie boeken</a>
+        <a th:href="@{/toonNieuwBoekForm}"> Voeg een nieuw boek toe </a>
+      </header>
+
+      <div th:each="boek : ${listBoeken}" class="book">
+        <h2 th:text="${boek.titel}" class="text-3xl mb-20"></h2>
+        <p th:text="${boek.auteurs}"></p>
+        <a th:href="@{/toonDetailBoekForm/{id}(id=${boek.id})}">Detail</a>
+      </div>
+    </div>
+  </body>
+</html>

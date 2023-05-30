@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Book Detail</title>
+    <link th:href="@{/main.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 th:text="|${boek.titel}|"></h1>
+        <a th:href="@{/}"> Terug naar catalogus </a>
+      </header>
+
+      <div class="detail">
+        <p th:text="|Auteur(s): ${boek.auteurs}|"></p>
+        <p th:text="|ISBN: ${boek.isbn} |"></p>
+        <p
+          th:text="|Prijs: &euro; ${#numbers.formatDecimal(boek.aankoopPrijs, 1, 'POINT', 2, 'COMMA')} |"
+        ></p>
+        <p th:text="|Aantal sterren: ${boek.aantalSterren} |"></p>
+        <p th:text="|Locatie(s): ${boek.locaties}|"></p>
+      </div>
+    </div>
+  </body>
+</html>
