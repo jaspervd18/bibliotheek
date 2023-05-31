@@ -13,8 +13,20 @@
         <a th:href="@{/toonNieuwBoekForm}"> Voeg een nieuw boek toe </a>
       </header>
 
+      <p th:text="|Hello ${username}|"></p>
+
+      <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout" />
+
+        <input
+          type="hidden"
+          th:name="${_csrf.parameterName}"
+          th:value="${_csrf.token}"
+        />
+      </form>
+
       <div th:each="boek : ${listBoeken}" class="book">
-        <h2 th:text="${boek.titel}" class="text-3xl mb-20"></h2>
+        <h2 th:text="${boek.titel}"></h2>
         <p th:text="${boek.auteurs}"></p>
         <a th:href="@{/toonDetailBoekForm/{id}(id=${boek.id})}">Detail</a>
       </div>
