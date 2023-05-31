@@ -21,7 +21,6 @@ public class Boek {
   @JoinTable(name = "auteur_boeken", joinColumns = @JoinColumn(name = "boek_id"), inverseJoinColumns = @JoinColumn(name = "auteur_id"))
   private List<Auteur> auteurs = new ArrayList<>();
 
-  @Column(unique = true)
   private String isbn;
 
   private double aankoopPrijs;
