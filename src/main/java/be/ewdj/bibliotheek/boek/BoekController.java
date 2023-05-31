@@ -29,13 +29,13 @@ public class BoekController {
     return "index";
   }
 
-  @GetMapping("/toonMeestFavorieteBoeken")
+  @GetMapping("/favorieten")
   public String toonMeestFavorieteBoeken(Model model) {
     model.addAttribute("listBoeken", boekRepo.findMostPopular());
     return "favorieten";
   }
 
-  @GetMapping("/toonDetailBoekForm/{id}")
+  @GetMapping("/detail/{id}")
   public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
     // get boek from the service
     Boek boek = boekRepo.findById(id);
@@ -44,7 +44,7 @@ public class BoekController {
     return "detail_boek";
   }
 
-  @GetMapping("/toonNieuwBoekForm")
+  @GetMapping("/nieuwBoek")
   public String toonNieuwBoekForm(Model model) {
     Boek boek = new Boek();
     Auteur auteur1 = new Auteur();

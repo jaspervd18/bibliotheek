@@ -21,23 +21,52 @@ html {
 /* Header */
 .header {
   display: flex;
-  align-items: center;
-  background-color: #333;
-  padding: 1rem;
+  align-items: baseline;
+  background-color: #4280c2;
+  padding: 0 1rem;
   color: #fff;
 }
 
 .header h1 {
-  padding-top: 10px;
-  padding-bottom: 10px;
   font-size: 36px;
   font-weight: bold;
+  margin-right: 20px;
 }
 
-.header a:first-of-type {
-  margin-left: auto;
+.header div {
+  margin-left: 20px;
   margin-right: 20px;
-  border-right: #f8f8f8;
+  text-decoration: none;
+  border-left: #fff;
+  border: #fff;
+  border-width: 4px;
+}
+
+.header a {
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid #ddd;
+  transition: all 0.2s ease-in-out;
+}
+
+.header a:hover {
+  color: #ddd;
+}
+
+.header form {
+  margin-left: auto;
+  align-self: center;
+}
+
+.header input {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px 20px;
+}
+
+.header input:hover {
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
 }
 
 .container {
@@ -121,7 +150,8 @@ html {
 }
 
 .nieuw-boek button {
-  background-color: #333;
+  padding: 15px;
+  background-color: #4280c2;
   color: #fff;
   border: 0;
   cursor: pointer;

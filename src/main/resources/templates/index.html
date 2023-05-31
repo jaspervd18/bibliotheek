@@ -9,8 +9,8 @@
     <div class="container">
       <header class="header">
         <h1>Bibliotheek</h1>
-        <a th:href="@{/toonMeestFavorieteBoeken}">Meest popularie boeken</a>
-        <a th:href="@{/toonNieuwBoekForm}"> Voeg een nieuw boek toe </a>
+        <div><a th:href="@{/favorieten}">Favorieten</a></div>
+        <a th:href="@{/nieuwBoek}">Nieuw boek</a>
         <form th:action="@{/logout}" method="post">
           <input type="submit" value="Logout" />
 
@@ -24,20 +24,10 @@
 
       <p th:text="|Hello ${username}|"></p>
 
-      <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Logout" />
-
-        <input
-          type="hidden"
-          th:name="${_csrf.parameterName}"
-          th:value="${_csrf.token}"
-        />
-      </form>
-
       <div th:each="boek : ${listBoeken}" class="book">
         <h2 th:text="${boek.titel}"></h2>
         <p th:text="${boek.auteurs}"></p>
-        <a th:href="@{/toonDetailBoekForm/{id}(id=${boek.id})}">Detail</a>
+        <a th:href="@{/detail/{id}(id=${boek.id})}">Detail</a>
       </div>
     </div>
   </body>
