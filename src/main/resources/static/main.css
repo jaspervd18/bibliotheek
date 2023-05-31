@@ -551,6 +551,14 @@ video {
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
 .book {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -663,33 +671,4 @@ video {
 
 .leading-6 {
   line-height: 1.5rem;
-}
-
-.error {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
-}
-
-.msg {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-}
-
-#login-box {
-  width: 300px;
-  padding: 20px;
-  margin: 100px auto;
-  background: #fff;
-  border-radius: 2px;
-  border: 1px solid #000;
 }
