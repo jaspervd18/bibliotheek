@@ -1,6 +1,7 @@
 package be.ewdj.bibliotheek.boek;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.web.exchanges.HttpExchange.Principal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +22,9 @@ public class BoekController {
   @Autowired
   private AuteurRepository auteurRepo;
 
-  @GetMapping("/")
-  public String viewHomePage(Model model) {
+  @GetMapping("/catalogus")
+  public String viewHomePage(Model model, Principal principal) {
+    model.addAttribute("username", principal.getName());
     model.addAttribute("listBoeken", boekRepo.findAll());
     return "index";
   }
@@ -30,7 +32,7 @@ public class BoekController {
   @GetMapping("/toonMeestFavorieteBoeken")
   public String toonMeestFavorieteBoeken(Model model) {
     model.addAttribute("listBoeken", boekRepo.findMostPopular());
-    return "meest_favoriete_boeken";
+    return "favorieten";
   }
 
   @GetMapping("/toonDetailBoekForm/{id}")

@@ -6,6 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import be.ewdj.bibliotheek.boek.Boek;
 import be.ewdj.bibliotheek.boek.BoekRepository;
@@ -15,10 +17,15 @@ import be.ewdj.bibliotheek.auteur.AuteurRepository;
 import be.ewdj.bibliotheek.locatie.LocatieRepository;
 
 @SpringBootApplication
-public class BibliotheekApplication {
+public class BibliotheekApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BibliotheekApplication.class, args);
+	}
+
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addRedirectViewController("/", "/catalogus");
 	}
 
 	@Bean
@@ -143,8 +150,9 @@ public class BibliotheekApplication {
 			boek17.addAuteur(auteur17);
 			boek18.addAuteur(auteur18);
 
-			boekRepo.saveAllAndFlush(Arrays.asList(boek1, boek2, boek3, boek4, boek5, boek6, boek7, boek8, boek9, boek10,
-					boek11, boek12, boek13, boek14, boek15, boek16, boek17, boek18));
+			boekRepo.saveAllAndFlush(
+					Arrays.asList(boek1, boek2, boek3, boek4, boek5, boek6, boek7, boek8, boek9, boek10,
+							boek11, boek12, boek13, boek14, boek15, boek16, boek17, boek18));
 
 			locatieRepo.saveAllAndFlush(Arrays.asList(locatie1, locatie2, locatie3, locatie4, locatie5, locatie6,
 					locatie7, locatie8, locatie9, locatie10, locatie11, locatie12, locatie13, locatie14, locatie15,
