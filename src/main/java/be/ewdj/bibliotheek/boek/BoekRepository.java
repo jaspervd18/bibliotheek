@@ -13,7 +13,7 @@ public interface BoekRepository extends JpaRepository<Boek, Long> {
   @Query("SELECT b FROM Boek b WHERE b.isbn = ?1")
   Optional<Boek> findByIsbn(String isbn);
 
-  @Query("SELECT b FROM Boek b ORDER BY b.aantalSterren, b.titel DESC LIMIT 10")
+  @Query("SELECT b FROM Boek b ORDER BY b.aantalSterren DESC, b.titel ASC LIMIT 10")
   List<Boek> findMostPopular();
 
   @Query("SELECT b FROM Boek b JOIN b.auteurs a WHERE a.naam LIKE ?1 OR a.voornaam LIKE ?1")

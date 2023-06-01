@@ -57,7 +57,7 @@ public class BibliotheekController {
         return "nieuw_boek";
     }
 
-    @PostMapping("/saveBoek")
+    @PostMapping("/nieuwBoek")
     public String saveBoek(@ModelAttribute("boek") Boek boek, @ModelAttribute("auteur1") Auteur auteur1) {
         auteurRepo.save(auteur1);
         boekRepo.save(boek);
