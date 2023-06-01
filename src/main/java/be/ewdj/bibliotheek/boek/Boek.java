@@ -37,11 +37,6 @@ public class Boek {
     this.aantalSterren = 0;
   }
 
-  public Boek(String titel, String isbn) {
-    this.titel = titel;
-    this.isbn = isbn;
-  }
-
   public Boek() {
   }
 
