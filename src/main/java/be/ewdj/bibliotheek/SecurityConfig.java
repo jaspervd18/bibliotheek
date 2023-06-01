@@ -1,4 +1,4 @@
-package be.ewdj.bibliotheek.security;
+package be.ewdj.bibliotheek;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,19 +20,21 @@ public class SecurityConfig {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         auth.inMemoryAuthentication()
-                .withUser("user").password(encoder.encode("user")).roles("USER");
+                .withUser("user").password(encoder.encode("user")).roles("USER").and()
+                .withUser("admin").password(encoder.encode("admin")).roles("USER", "ADMIN");
     }
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-        http.csrf(withDefaults()).authorizeHttpRequests(requests -> requests.requestMatchers("/login**").permitAll()
-                .requestMatchers("/css/**").permitAll()
-                .requestMatchers("/*").hasRole("USER")).formLogin(form -> form
-                        .defaultSuccessUrl("/catalogus", true)
-                        .loginPage("/login"));
+        http.authorizeHttpRequests(requests -> requests.requestMatchers("/*").permitAll()
+                .requestMatchers("/403**").permitAll()
+                .requestMatchers("/catalogus").permitAll()
+                .requestMatchers("/detail/*").permitAll()
+                .requestMatchers("/favorieten").permitAll()
+                .requestMatchers("/nieuwBoek").hasRole("ADMIN"))
+                .formLogin(form -> form.defaultSuccessUrl("/catalogus", true))
+                .exceptionHandling(handling -> handling.accessDeniedPage("/403"));
 
         return http.build();
-
     }
 }
