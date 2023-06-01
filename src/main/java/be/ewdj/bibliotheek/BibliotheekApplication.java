@@ -175,6 +175,25 @@ public class BibliotheekApplication implements WebMvcConfigurer {
 			boek17.addAuteur(auteur17);
 			boek18.addAuteur(auteur18);
 
+			boek1.setAantalSterren(4);
+			boek2.setAantalSterren(3);
+			boek3.setAantalSterren(5);
+			boek4.setAantalSterren(4);
+			boek5.setAantalSterren(3);
+			boek6.setAantalSterren(5);
+			boek7.setAantalSterren(10);
+			boek8.setAantalSterren(4);
+			boek9.setAantalSterren(12);
+			boek10.setAantalSterren(3);
+			boek11.setAantalSterren(9);
+			boek12.setAantalSterren(8);
+			boek13.setAantalSterren(7);
+			boek14.setAantalSterren(16);
+			boek15.setAantalSterren(5);
+			boek16.setAantalSterren(22);
+			boek17.setAantalSterren(10);
+			boek18.setAantalSterren(12);
+
 			boekRepo.saveAllAndFlush(
 					Arrays.asList(boek1, boek2, boek3, boek4, boek5, boek6, boek7, boek8, boek9, boek10,
 							boek11, boek12, boek13, boek14, boek15, boek16, boek17, boek18));
