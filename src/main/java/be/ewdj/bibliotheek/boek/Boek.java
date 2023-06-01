@@ -3,11 +3,16 @@ package be.ewdj.bibliotheek.boek;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.validator.constraints.ISBN;
+import org.springframework.format.annotation.NumberFormat;
+
 import be.ewdj.bibliotheek.auteur.Auteur;
 import be.ewdj.bibliotheek.locatie.Locatie;
+import be.ewdj.bibliotheek.validator.AuteursNotEmpty;
+import be.ewdj.bibliotheek.validator.LocatiesNotEmpty;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -18,22 +23,28 @@ public class Boek {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @NotBlank
+  @NotBlank(message = "{titel.verplicht}")
   private String titel;
 
-  @ManyToMany
-  @JoinTable(name = "auteur_boeken", joinColumns = @JoinColumn(name = "boek_id"), inverseJoinColumns = @JoinColumn(name = "auteur_id"))
-  private List<Auteur> auteurs = new ArrayList<>();
-
+  @ISBN(message = "{isbn.ongeldig}")
+  @NotBlank(message = "{isbn.verplicht}")
+  @Column(unique = true)
   private String isbn;
 
-  @Min(0)
-  @Max(100)
+  @DecimalMin(value = "0.00", inclusive = false, message = "{aankoopPrijs.teLaag}")
+  @DecimalMax(value = "100.00", inclusive = false, message = "{aankoopPrijs.teHoog}")
+  @NumberFormat(pattern = "0.00", style = NumberFormat.Style.NUMBER)
   private double aankoopPrijs;
 
   private int aantalSterren;
 
+  @ManyToMany
+  @JoinTable(name = "auteur_boeken", joinColumns = @JoinColumn(name = "boek_id"), inverseJoinColumns = @JoinColumn(name = "auteur_id"))
+  @AuteursNotEmpty
+  private List<Auteur> auteurs = new ArrayList<>();
+
   @OneToMany(mappedBy = "boek")
+  @LocatiesNotEmpty
   private List<Locatie> locaties = new ArrayList<>();
 
   public Boek(String titel, String isbn, double aankoopPrijs) {
@@ -145,7 +156,7 @@ public class Boek {
 
   @Override
   public String toString() {
-    return "Book [titel=" + titel + "]";
+    return titel;
   }
 
 }

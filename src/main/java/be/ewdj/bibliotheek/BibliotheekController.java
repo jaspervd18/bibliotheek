@@ -17,6 +17,7 @@ import be.ewdj.bibliotheek.boek.Boek;
 import be.ewdj.bibliotheek.boek.BoekRepository;
 import be.ewdj.bibliotheek.locatie.Locatie;
 import be.ewdj.bibliotheek.locatie.LocatieRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class BibliotheekController {
@@ -59,7 +60,7 @@ public class BibliotheekController {
     }
 
     @PostMapping("/nieuwBoek")
-    public String saveNieuwBoek(@ModelAttribute("boek") Boek boek) {
+    public String saveNieuwBoek(@Valid @ModelAttribute("boek") Boek boek) {
         Iterator<Auteur> itrAuteurs = boek.getAuteurs().iterator();
         while (itrAuteurs.hasNext()) {
             Auteur auteur = itrAuteurs.next();
