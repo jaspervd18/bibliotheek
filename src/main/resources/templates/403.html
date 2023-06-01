@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1">
-<title>Access is denied</title>
-</head>
-<body>
-	<h1>HTTP Status 403 - Access is denied</h1>
-
-	<form th:action="@{/logout}" method="post">
-		<input type="submit" value="Logout" /> 
-		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-	</form>
-</body>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Access is denied</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-slate-50">
+    <div class="max-w-screen-lg mx-auto px-4 drop-shadow-lg bg-white pb-4">
+      <h1 class="text-center text-2xl py-4">
+        Oeps, je hebt geen toegang tot deze pagina.
+      </h1>
+      <div class="flex gap-4 justify-center">
+        <a class="mr-4 text-blue-500 hover:text-blue-600" th:href="@{/}"
+          >Terug naar catalogus</a
+        >
+        <form th:action="@{/logout}" method="post" class="text-center">
+          <input
+            type="submit"
+            value="Logout"
+            class="inline-block px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-700"
+          />
+          <input
+            type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}"
+          />
+        </form>
+      </div>
+    </div>
+  </body>
 </html>
