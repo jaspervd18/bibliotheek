@@ -6,7 +6,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-slate-50">
-    <div class="max-w-screen-lg mx-auto px-4 drop-shadow-lg bg-white pb-4">
+    <div
+      class="max-w-screen-lg mx-auto px-4 drop-shadow-lg bg-white pb-4 h-screen"
+    >
       <header
         class="flex items-center px-4 py-8 bg-blue-500 rounded-b-lg shadow"
       >
@@ -35,135 +37,177 @@
         th:action="@{/saveBoek}"
         th:object="${boek}"
         method="POST"
-        class="grid grid-cols-4 gap-2 p-4 bg-white rounded shadow mt-4"
+        class="flex flex-col gap-2 p-4 mt-4 max-w-screen-sm mx-auto bg-slate-50 rounded drop-shadow-md"
       >
-        <label for="titel" class="col-span-2">Titel</label>
-        <label for="isbn" class="col-span-2">ISBN</label>
+        <div class="flex flex-col gap-1">
+          <label
+            for="titel"
+            class="text-gray-600"
+            th:text="|#{titel}:|"
+          ></label>
+          <input
+            type="text"
+            placeholder="Titel"
+            th:field="*{titel}"
+            id="titel"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+          />
+        </div>
 
-        <input
-          type="text"
-          placeholder="Titel"
-          th:field="*{titel}"
-          id="titel"
-          class="col-span-2 border-2 border-black rounded px-2 py-1"
-        />
+        <div class="flex gap-2">
+          <div class="flex flex-col gap-1 w-3/4">
+            <label
+              for="titel"
+              class="text-gray-600"
+              th:text="|#{isbn}:|"
+            ></label>
+            <input
+              type="text"
+              th:placeholder="#{isbn}"
+              th:field="*{isbn}"
+              id="titel"
+              class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+            />
+          </div>
+          <div class="flex flex-col gap-1 w-1/4">
+            <label
+              for="prijs"
+              class="text-gray-600"
+              th:text="|#{prijs}:|"
+            ></label>
+            <input
+              type="number"
+              th:placeholder="#{prijs}"
+              th:field="*{aankoopPrijs}"
+              id="prijs"
+              min="0"
+              step="0.01"
+              class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+            />
+          </div>
+        </div>
 
-        <input
-          type="text"
-          placeholder="ISBN"
-          th:field="*{isbn}"
-          id="isbn"
-          class="col-span-2 border-2 border-black rounded px-2 py-1"
-        />
+        <p th:text="|#{auteurs}:|" class="text-gray-600 mt-4"></p>
 
-        <label for="auteur1" class="col-span-2">Auteur 1</label>
-        <label for="auteur2" class="col-span-2">Auteur 2</label>
-        <input
-          type="text"
-          th:field="*{auteurs[0].voornaam}"
-          placeholder="Voornaam auteur 1"
-          class="col-span-1 border-2 border-black rounded px-2 py-1"
-        />
-        <input
-          type="text"
-          th:field="*{auteurs[0].naam}"
-          placeholder="Achternaam auteur 1"
-          class="col-span-1 border-2 border-black rounded px-2 py-1"
-        />
+        <div class="flex gap-2 items-center">
+          <input
+            type="text"
+            th:field="*{auteurs[0].voornaam}"
+            placeholder="Voornaam auteur 1"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+          />
+          <input
+            type="text"
+            th:field="*{auteurs[0].naam}"
+            placeholder="Achternaam auteur 1"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+          />
+        </div>
 
-        <input
-          type="text"
-          th:field="*{auteurs[1].voornaam}"
-          placeholder="Voornaam auteur 2"
-          class="col-span-1 border-2 border-black rounded px-2 py-1"
-        />
-        <input
-          type="text"
-          th:field="*{auteurs[1].naam}"
-          placeholder="Achternaam auteur 2"
-          class="col-span-1 border-2 border-black rounded px-2 py-1"
-        />
-        <!-- <label for="auteur3">Auteur 3</label>
-        <div>
+        <div class="flex gap-2 items-center">
+          <input
+            type="text"
+            th:field="*{auteurs[1].voornaam}"
+            placeholder="Voornaam auteur 2"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+          />
+          <input
+            type="text"
+            th:field="*{auteurs[1].naam}"
+            placeholder="Achternaam auteur 2"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+          />
+        </div>
+
+        <div class="flex gap-2 items-center">
           <input
             type="text"
             th:field="*{auteurs[2].voornaam}"
             placeholder="Voornaam auteur 3"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
           <input
             type="text"
             th:field="*{auteurs[2].naam}"
             placeholder="Achternaam auteur 3"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
-        </div> -->
+        </div>
 
-        <label for="aankoopPrijs" class="col-span-2">Aankoopprijs</label>
-        <input
-          type="number"
-          placeholder="Aankoopprijs"
-          th:field="*{aankoopPrijs}"
-          id="aankoopPrijs"
-          min="0"
-          step="0.01"
-          class="col-span-2 border-2 border-black rounded px-2 py-1 col-start-1"
-        />
+        <p th:text="|#{locaties}:|" class="text-gray-600 mt-4"></p>
 
-        <!-- <label for="locaties">Locaties</label>
-        <div>
+        <div class="flex gap-2 items-center">
           <input
             type="number"
             th:field="*{locaties[0].code1}"
-            placeholder="Code 1"
+            min="50"
+            max="300"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
-            type="text"
+            type="number"
             th:field="*{locaties[0].code2}"
-            placeholder="Code 2"
+            min="50"
+            max="300"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
             type="text"
             th:field="*{locaties[0].plaatsnaam}"
             placeholder="Plaatsnaam"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
         </div>
-        <div>
+
+        <div class="flex gap-2 items-center">
           <input
             type="number"
             th:field="*{locaties[1].code1}"
-            placeholder="Code 1"
+            min="50"
+            max="300"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
-            type="text"
+            type="number"
             th:field="*{locaties[1].code2}"
-            placeholder="Code 2"
+            min="50"
+            max="300"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
             type="text"
             th:field="*{locaties[1].plaatsnaam}"
             placeholder="Plaatsnaam"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
         </div>
-        <div>
+
+        <div class="flex gap-2 items-center">
           <input
             type="number"
             th:field="*{locaties[2].code1}"
-            placeholder="Code 1"
+            min="50"
+            max="300"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
-            type="text"
+            type="number"
             th:field="*{locaties[2].code2}"
-            placeholder="Code 2"
+            min="50"
+            max="300"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
             type="text"
             th:field="*{locaties[2].plaatsnaam}"
             placeholder="Plaatsnaam"
+            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
-        </div> -->
+        </div>
 
         <button
           type="submit"
-          class="col-start-4 inline-block px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-700"
+          class="col-start-4 inline-block px-6 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 mt-4 max-w-fit"
         >
           Maak nieuw boek aan
         </button>
