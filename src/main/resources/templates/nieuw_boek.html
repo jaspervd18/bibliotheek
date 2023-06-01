@@ -37,7 +37,7 @@
 
       <form
         action="#"
-        th:action="@{/saveBoek}"
+        th:action="@{/nieuwBoek}"
         th:object="${boek}"
         method="POST"
         class="flex flex-col gap-2 p-4 mt-4 max-w-screen-sm mx-auto bg-slate-50 rounded drop-shadow-md"
@@ -141,17 +141,13 @@
 
         <div class="flex gap-2 items-center">
           <input
-            type="number"
+            type="text"
             th:field="*{locaties[0].code1}"
-            min="50"
-            max="300"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
-            type="number"
+            type="text"
             th:field="*{locaties[0].code2}"
-            min="50"
-            max="300"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
@@ -164,17 +160,13 @@
 
         <div class="flex gap-2 items-center">
           <input
-            type="number"
+            type="text"
             th:field="*{locaties[1].code1}"
-            min="50"
-            max="300"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
-            type="number"
+            type="text"
             th:field="*{locaties[1].code2}"
-            min="50"
-            max="300"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
@@ -187,17 +179,13 @@
 
         <div class="flex gap-2 items-center">
           <input
-            type="number"
+            type="text"
             th:field="*{locaties[2].code1}"
-            min="50"
-            max="300"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
-            type="number"
+            type="text"
             th:field="*{locaties[2].code2}"
-            min="50"
-            max="300"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
@@ -210,8 +198,8 @@
 
         <button
           type="submit"
-          class="col-start-4 inline-block px-6 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 mt-4 max-w-fit"
-          th:text="#{maakNieuwBoekAan}"
+          class="col-start-4 inline-block px-6 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 mt-4 max-w-fit shadow-lg"
+          th:text="#{opslaan}"
         ></button>
       </form>
     </div>
