@@ -6,6 +6,9 @@ import java.util.List;
 import be.ewdj.bibliotheek.auteur.Auteur;
 import be.ewdj.bibliotheek.locatie.Locatie;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "boeken")
@@ -15,6 +18,7 @@ public class Boek {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  @NotBlank
   private String titel;
 
   @ManyToMany
@@ -23,6 +27,8 @@ public class Boek {
 
   private String isbn;
 
+  @Min(0)
+  @Max(100)
   private double aankoopPrijs;
 
   private int aantalSterren;
