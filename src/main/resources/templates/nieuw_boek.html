@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>Nieuw Boek</title>
+    <title th:text="#{nieuwBoek}"></title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-slate-50">
@@ -12,17 +12,20 @@
       <header
         class="flex items-center px-4 py-8 bg-blue-500 rounded-b-lg shadow"
       >
-        <h1 class="text-3xl font-bold text-slate-50 mr-6">Nieuw boek</h1>
+        <h1
+          th:text="#{nieuwBoek}"
+          class="text-3xl font-bold text-slate-50 mr-6"
+        ></h1>
         <a
           class="mr-4 text-slate-50 hover:text-slate-200 border-l border-slate-50 pl-4"
           th:href="@{/}"
-          >Terug naar catalogus</a
-        >
+          th:text="#{terug}"
+        ></a>
         <form th:action="@{/logout}" method="post" class="ml-auto">
           <input
             class="px-2 py-1 bg-slate-50 text-blue-500 rounded hover:bg-slate-200 hover:text-blue-600 cursor-pointer"
             type="submit"
-            value="Logout"
+            th:value="#{logout}"
           />
           <input
             type="hidden"
@@ -93,13 +96,13 @@
           <input
             type="text"
             th:field="*{auteurs[0].voornaam}"
-            placeholder="Voornaam auteur 1"
+            th:placeholder="|#{voornaam} 1|"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
           <input
             type="text"
             th:field="*{auteurs[0].naam}"
-            placeholder="Achternaam auteur 1"
+            th:placeholder="|#{achternaam} 1|"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
         </div>
@@ -108,13 +111,13 @@
           <input
             type="text"
             th:field="*{auteurs[1].voornaam}"
-            placeholder="Voornaam auteur 2"
+            th:placeholder="|#{voornaam} 2|"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
           <input
             type="text"
             th:field="*{auteurs[1].naam}"
-            placeholder="Achternaam auteur 2"
+            th:placeholder="|#{achternaam} 2|"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
         </div>
@@ -123,13 +126,13 @@
           <input
             type="text"
             th:field="*{auteurs[2].voornaam}"
-            placeholder="Voornaam auteur 3"
+            th:placeholder="|#{voornaam} 3|"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
           <input
             type="text"
             th:field="*{auteurs[2].naam}"
-            placeholder="Achternaam auteur 3"
+            th:placeholder="|#{achternaam} 3|"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
         </div>
@@ -154,7 +157,7 @@
           <input
             type="text"
             th:field="*{locaties[0].plaatsnaam}"
-            placeholder="Plaatsnaam"
+            th:placeholder="|#{plaatsnaam} 1|"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
         </div>
@@ -177,7 +180,7 @@
           <input
             type="text"
             th:field="*{locaties[1].plaatsnaam}"
-            placeholder="Plaatsnaam"
+            th:placeholder="|#{plaatsnaam} 2|"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
         </div>
@@ -200,7 +203,7 @@
           <input
             type="text"
             th:field="*{locaties[2].plaatsnaam}"
-            placeholder="Plaatsnaam"
+            th:placeholder="|#{plaatsnaam} 3|"
             class="border border-gray-600 rounded px-2 py-1 text-gray-600"
           />
         </div>
@@ -208,9 +211,8 @@
         <button
           type="submit"
           class="col-start-4 inline-block px-6 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 mt-4 max-w-fit"
-        >
-          Maak nieuw boek aan
-        </button>
+          th:text="#{maakNieuwBoekAan}"
+        ></button>
       </form>
     </div>
   </body>
