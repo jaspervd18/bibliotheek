@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>Book Detail</title>
+    <title th:text="#{detail}"></title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-slate-50">
@@ -17,13 +17,13 @@
         <a
           class="mr-4 text-slate-50 hover:text-slate-200 border-l border-slate-50 pl-4"
           th:href="@{/}"
-          >Terug naar catalogus</a
-        >
+          th:text="#{terug}"
+        ></a>
         <form th:action="@{/logout}" method="post" class="ml-auto">
           <input
             class="px-2 py-1 bg-slate-50 text-blue-500 rounded hover:bg-slate-200 hover:text-blue-600 cursor-pointer"
             type="submit"
-            value="Logout"
+            th:value="#{logout}"
           />
           <input
             type="hidden"
@@ -35,22 +35,26 @@
 
       <div class="p-2">
         <p
-          th:text="|Auteur(s): ${#strings.listJoin(boek.auteurs, ', ')}|"
+          th:text="|#{auteurs}: ${#strings.listJoin(boek.auteurs, ', ')}|"
           class="text-gray-600 mb-4"
         ></p>
-        <p th:text="|ISBN: ${boek.isbn} |" class="text-gray-600 mb-4"></p>
+        <p th:text="|#{isbn}: ${boek.isbn} |" class="text-gray-600 mb-4"></p>
         <p
-          th:text="|Prijs: &euro; ${#numbers.formatDecimal(boek.aankoopPrijs, 1, 'POINT', 2, 'COMMA')} |"
-          class="text-gray-600 mb-4"
-        ></p>
-        <p
-          th:text="|Aantal sterren: ${boek.aantalSterren} |"
+          th:text="|#{prijs}: &euro; ${#numbers.formatDecimal(boek.aankoopPrijs, 1, 'POINT', 2, 'COMMA')} |"
           class="text-gray-600 mb-4"
         ></p>
         <p
-          th:text="|Locatie(s): ${#strings.listJoin(boek.locaties, '- ')}|"
+          th:text="|#{sterren}: ${boek.aantalSterren} |"
           class="text-gray-600 mb-4"
         ></p>
+        <p th:text="|#{locaties}:|" class="text-gray-600"></p>
+        <ul class="list-disc ml-8 text-gray-600">
+          <li
+            th:each="locatie : ${boek.locaties}"
+            th:text="${locatie}"
+            class="text-gray-600"
+          ></li>
+        </ul>
       </div>
     </div>
   </body>
