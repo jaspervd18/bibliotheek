@@ -4,6 +4,7 @@ import java.util.List;
 
 import be.ewdj.bibliotheek.boek.Boek;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "auteurs")
@@ -13,7 +14,10 @@ public class Auteur {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  @NotBlank
   private String naam;
+
+  @NotBlank
   private String voornaam;
 
   @ManyToMany(mappedBy = "auteurs")
