@@ -3,23 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <title>Book Detail</title>
-    <link th:href="@{/main.css}" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <div class="container">
-      <header class="header">
-        <h1 th:text="|${boek.titel}|"></h1>
-        <a th:href="@{/}"> Terug naar catalogus </a>
+  <body class="bg-slate-50">
+    <div class="max-w-screen-lg mx-auto px-4 drop-shadow-lg bg-white pb-4">
+      <header
+        class="flex items-center px-4 py-8 bg-blue-500 rounded-b-lg shadow"
+      >
+        <h1
+          th:text="${boek.titel}"
+          class="text-3xl font-bold text-slate-50 mr-6"
+        ></h1>
+        <a
+          class="mr-4 text-slate-50 hover:text-slate-200 border-l border-slate-50 pl-4"
+          th:href="@{/}"
+          >Terug naar catalogus</a
+        >
+        <form th:action="@{/logout}" method="post" class="ml-auto">
+          <input
+            class="px-2 py-1 bg-slate-50 text-blue-500 rounded hover:bg-slate-200 hover:text-blue-600 cursor-pointer"
+            type="submit"
+            value="Logout"
+          />
+          <input
+            type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}"
+          />
+        </form>
       </header>
 
-      <div class="detail">
-        <p th:text="|Auteur(s): ${boek.auteurs}|"></p>
-        <p th:text="|ISBN: ${boek.isbn} |"></p>
+      <div class="p-2">
+        <p
+          th:text="|Auteur(s): ${#strings.listJoin(boek.auteurs, ', ')}|"
+          class="text-gray-600 mb-4"
+        ></p>
+        <p th:text="|ISBN: ${boek.isbn} |" class="text-gray-600 mb-4"></p>
         <p
           th:text="|Prijs: &euro; ${#numbers.formatDecimal(boek.aankoopPrijs, 1, 'POINT', 2, 'COMMA')} |"
+          class="text-gray-600 mb-4"
         ></p>
-        <p th:text="|Aantal sterren: ${boek.aantalSterren} |"></p>
-        <p th:text="|Locatie(s): ${boek.locaties}|"></p>
+        <p
+          th:text="|Aantal sterren: ${boek.aantalSterren} |"
+          class="text-gray-600 mb-4"
+        ></p>
+        <p
+          th:text="|Locatie(s): ${#strings.listJoin(boek.locaties, '- ')}|"
+          class="text-gray-600 mb-4"
+        ></p>
       </div>
     </div>
   </body>
