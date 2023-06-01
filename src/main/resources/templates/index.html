@@ -9,11 +9,12 @@
     <div class="container">
       <header class="header">
         <h1>Bibliotheek</h1>
-        <div><a th:href="@{/favorieten}">Favorieten</a></div>
-        <a th:href="@{/nieuwBoek}">Nieuw boek</a>
+        <a th:href="@{/favorieten}">Favorieten</a>
+        <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+          <a th:href="@{/nieuwBoek}">Nieuw boek</a>
+        </th:block>
         <form th:action="@{/logout}" method="post">
           <input type="submit" value="Logout" />
-
           <input
             type="hidden"
             th:name="${_csrf.parameterName}"
