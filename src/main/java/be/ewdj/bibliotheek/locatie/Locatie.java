@@ -2,6 +2,10 @@ package be.ewdj.bibliotheek.locatie;
 
 import be.ewdj.bibliotheek.boek.Boek;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "locaties")
@@ -11,8 +15,16 @@ public class Locatie {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  @Min(50)
+  @Max(300)
   private int code1;
+
+  @Min(50)
+  @Max(300)
   private int code2;
+
+  @NotBlank
+  @Pattern(regexp = "[A-Z][a-z]+")
   private String plaatsnaam;
 
   @ManyToOne
