@@ -63,7 +63,8 @@ public class BibliotheekController {
         Iterator<Auteur> itrAuteurs = boek.getAuteurs().iterator();
         while (itrAuteurs.hasNext()) {
             Auteur auteur = itrAuteurs.next();
-            if (auteur.getNaam() == null || auteur.getNaam().equals("") || auteur.getVoornaam() == null
+            if (auteur.getNaam() == null || auteur.getNaam().equals("") ||
+                    auteur.getVoornaam() == null
                     || auteur.getVoornaam().equals("")) {
                 itrAuteurs.remove();
             } else {
