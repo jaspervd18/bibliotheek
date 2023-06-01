@@ -31,12 +31,24 @@ public class Auteur {
     return naam;
   }
 
+  public void setNaam(String naam) {
+    this.naam = naam;
+  }
+
   public String getVoornaam() {
     return voornaam;
   }
 
+  public void setVoornaam(String voornaam) {
+    this.voornaam = voornaam;
+  }
+
   public long getId() {
     return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
   }
 
   @Override
