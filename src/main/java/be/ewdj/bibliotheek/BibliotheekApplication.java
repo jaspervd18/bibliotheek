@@ -26,6 +26,7 @@ public class BibliotheekApplication implements WebMvcConfigurer {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addRedirectViewController("/", "/catalogus");
+		registry.addViewController("/403").setViewName("403");
 	}
 
 	@Bean
