@@ -30,7 +30,7 @@ public class BibliotheekController {
     public String viewHomePage(Model model, Authentication authentication) {
         model.addAttribute("username", authentication.getName());
         model.addAttribute("listBoeken", boekRepo.findAll());
-        return "index";
+        return "catalogus";
     }
 
     @GetMapping("/favorieten")
