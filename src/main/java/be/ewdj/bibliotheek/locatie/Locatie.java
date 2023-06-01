@@ -27,20 +27,28 @@ public class Locatie {
   public Locatie() {
   }
 
-  public long getId() {
-    return id;
-  }
-
   public int getCode1() {
     return code1;
+  }
+
+  public void setCode1(int code1) {
+    this.code1 = code1;
   }
 
   public int getCode2() {
     return code2;
   }
 
+  public void setCode2(int code2) {
+    this.code2 = code2;
+  }
+
   public String getPlaatsnaam() {
     return plaatsnaam;
+  }
+
+  public void setPlaatsnaam(String plaatsnaam) {
+    this.plaatsnaam = plaatsnaam;
   }
 
   public Boek getBoek() {
@@ -51,16 +59,12 @@ public class Locatie {
     this.boek = boek;
   }
 
-  public void setPlaatsnaam(String plaatsnaam) {
-    this.plaatsnaam = plaatsnaam;
+  public long getId() {
+    return id;
   }
 
-  public void setCode1(int code1) {
-    this.code1 = code1;
-  }
-
-  public void setCode2(int code2) {
-    this.code2 = code2;
+  public void setId(long id) {
+    this.id = id;
   }
 
   @Override
