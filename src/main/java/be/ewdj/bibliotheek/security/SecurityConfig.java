@@ -29,11 +29,8 @@ public class SecurityConfig {
                 .accessDeniedPage("/403")
                 .and()
                 .authorizeHttpRequests((requests) -> {
-                    requests.requestMatchers("/403**").permitAll();
-                    requests.requestMatchers("/catalogus").permitAll();
-                    requests.requestMatchers("/detail/*").permitAll();
-                    requests.requestMatchers("/favorieten").permitAll();
-                    requests.requestMatchers("/nieuwBoek").hasRole("ADMIN");
+                    requests.requestMatchers("/*").permitAll();
+                    requests.requestMatchers("/*/*").permitAll();
                 })
                 .formLogin(form -> form.defaultSuccessUrl("/catalogus", true))
                 .httpBasic();

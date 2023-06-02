@@ -41,31 +41,35 @@ public class BibliotheekController {
     @GetMapping(value = "/catalogus")
     public String toonCatalogus(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getName());
         UserEntity user = userRepository.findByUsername(auth.getName());
-        System.out.println(user.getRole().toString());
+        model.addAttribute("user", user);
         model.addAttribute("listBoeken", boekRepo.findAll());
-        // model.addAttribute("user", user);
         return "catalogus";
     }
 
     @GetMapping("/favorieten")
     public String toonFavorieten(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserEntity user = userRepository.findByUsername(auth.getName());
+        model.addAttribute("user", user);
         model.addAttribute("listBoeken", boekRepo.findMostPopular());
         return "favorieten";
     }
 
-    @GetMapping("/detail/{id}")
-    public String toonDetail(@PathVariable(value = "id") long id, Model model) {
-        // get boek from the service
-        Boek boek = boekRepo.findById(id);
-        // set boek as a model attribute to pre-populate the form
-        model.addAttribute("boek", boek);
+    @GetMapping("/detail/{isbn}")
+    public String toonDetail(@PathVariable(value = "isbn") String isbn, Model model) {
+        model.addAttribute("boek", boekRepo.findByIsbn(isbn));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserEntity user = userRepository.findByUsername(auth.getName());
+        model.addAttribute("user", user);
         return "detail_boek";
     }
 
     @GetMapping("/nieuwBoek")
     public String nieuwBoek(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserEntity user = userRepository.findByUsername(auth.getName());
+        model.addAttribute("user", user);
         model.addAttribute("boek", new Boek());
         return "nieuw_boek";
     }

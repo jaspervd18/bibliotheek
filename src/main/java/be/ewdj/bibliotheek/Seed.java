@@ -182,11 +182,11 @@ public class Seed implements CommandLineRunner {
                                 Roles.ADMIN);
                 UserEntity user2 = new UserEntity("user",
                                 "$2a$12$30FxlwGA7AUSgeVnI8bNSOOQRGiZ7Pt3Jn9erKsFKXqW8q5yYezJi", Roles.USER);
-                UserEntity user3 = new UserEntity("piet",
+                UserEntity user3 = new UserEntity("Piet",
                                 "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q", Roles.USER);
-                UserEntity user4 = new UserEntity("jan", "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q",
+                UserEntity user4 = new UserEntity("Jan", "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q",
                                 Roles.USER);
-                UserEntity user5 = new UserEntity("jef", "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q",
+                UserEntity user5 = new UserEntity("Jef", "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q",
                                 Roles.ADMIN);
 
                 userRepo.saveAllAndFlush(Arrays.asList(user1, user2, user3, user4, user5));

@@ -19,13 +19,31 @@
           th:href="@{/catalogus}"
           th:text="#{terug}"
         ></a>
-        <form th:action="@{/logout}" method="post" class="ml-auto">
-          <input
-            class="px-2 py-1 bg-slate-50 text-blue-500 rounded hover:bg-slate-200 hover:text-blue-600 cursor-pointer"
-            type="submit"
-            th:value="#{logout}"
-          />
-        </form>
+        <div class="ml-auto flex gap-4 items-center">
+          <div class="flex flex-col items-end">
+            <p
+              th:text="|#{welkom}, ${user.username}|"
+              class="text-slate-50"
+            ></p>
+            <p
+              th:if="${user.role.toString() == 'ADMIN'}"
+              th:text="#{rechten.admin}"
+              class="text-slate-50"
+            ></p>
+            <p
+              th:unless="${user.role.toString() == 'ADMIN'}"
+              th:text="#{rechten.user}"
+              class="text-slate-50"
+            ></p>
+          </div>
+          <form th:action="@{/logout}" method="post">
+            <input
+              class="px-2 py-1 bg-slate-50 text-blue-500 rounded hover:bg-slate-200 hover:text-blue-600 cursor-pointer"
+              type="submit"
+              th:value="#{logout}"
+            />
+          </form>
+        </div>
       </header>
 
       <div class="p-2">
