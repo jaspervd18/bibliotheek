@@ -33,7 +33,8 @@ public class BibliotheekController {
 
     @GetMapping(value = "/catalogus")
     public String toonCatalogus(Model model, Authentication authentication) {
-        model.addAttribute("username", authentication.getName());
+        System.out.println(null == authentication ? "null" : authentication.getName());
+        // model.addAttribute("username", authentication.getName());
         model.addAttribute("listBoeken", boekRepo.findAll());
         return "catalogus";
     }

@@ -2,7 +2,6 @@ package be.ewdj.bibliotheek;
 
 import java.util.Arrays;
 
-import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -184,11 +183,17 @@ public class Seed implements CommandLineRunner {
                 Role admin = new Role("ADMIN");
                 Role user = new Role("USER");
 
-                UserEntity user1 = new UserEntity("admin", "admin", Arrays.asList(user, admin));
-                UserEntity user2 = new UserEntity("user", "user", Arrays.asList(user));
-                UserEntity user3 = new UserEntity("piet", "1234", Arrays.asList(user));
-                UserEntity user4 = new UserEntity("jan", "1234", Arrays.asList(user));
-                UserEntity user5 = new UserEntity("jef", "1234", Arrays.asList(user, admin));
+                UserEntity user1 = new UserEntity("admin",
+                                "$2a$12$.XkLZQ8Zdwl.2T9WLhoXBe5obkk6U5DQ3Qg6GVfK4pQ.QgccoYACy",
+                                Arrays.asList(user, admin));
+                UserEntity user2 = new UserEntity("user",
+                                "$2a$12$30FxlwGA7AUSgeVnI8bNSOOQRGiZ7Pt3Jn9erKsFKXqW8q5yYezJi", Arrays.asList(user));
+                UserEntity user3 = new UserEntity("piet",
+                                "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q", Arrays.asList(user));
+                UserEntity user4 = new UserEntity("jan", "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q",
+                                Arrays.asList(user));
+                UserEntity user5 = new UserEntity("jef", "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q",
+                                Arrays.asList(user, admin));
 
                 userRepo.saveAllAndFlush(Arrays.asList(user1, user2, user3, user4, user5));
 
