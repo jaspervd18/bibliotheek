@@ -1,9 +1,11 @@
 package be.ewdj.bibliotheek;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import be.ewdj.bibliotheek.models.Auteur;
 import be.ewdj.bibliotheek.models.Boek;
 import be.ewdj.bibliotheek.models.Locatie;
+import be.ewdj.bibliotheek.models.UserEntity;
 import be.ewdj.bibliotheek.repository.AuteurRepository;
 import be.ewdj.bibliotheek.repository.BoekRepository;
 import be.ewdj.bibliotheek.repository.LocatieRepository;
+import be.ewdj.bibliotheek.repository.UserRepository;
 import jakarta.validation.Valid;
 
 @Controller
@@ -31,11 +35,17 @@ public class BibliotheekController {
     @Autowired
     private LocatieRepository locatieRepo;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping(value = "/catalogus")
-    public String toonCatalogus(Model model, Authentication authentication) {
-        System.out.println(null == authentication ? "null" : authentication.getName());
-        // model.addAttribute("username", authentication.getName());
+    public String toonCatalogus(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
+        UserEntity user = userRepository.findByUsername(auth.getName());
+        System.out.println(user.getRole().toString());
         model.addAttribute("listBoeken", boekRepo.findAll());
+        // model.addAttribute("user", user);
         return "catalogus";
     }
 
