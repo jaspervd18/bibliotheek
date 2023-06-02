@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import be.ewdj.bibliotheek.models.Auteur;
 import be.ewdj.bibliotheek.models.Boek;
 import be.ewdj.bibliotheek.models.Locatie;
-import be.ewdj.bibliotheek.models.Role;
+import be.ewdj.bibliotheek.models.Roles;
 import be.ewdj.bibliotheek.models.UserEntity;
 import be.ewdj.bibliotheek.repository.*;
 
@@ -24,9 +24,6 @@ public class Seed implements CommandLineRunner {
 
         @Autowired
         private LocatieRepository locatieRepo;
-
-        @Autowired
-        private RoleRepository roleRepo;
 
         @Autowired
         private UserRepository userRepo;
@@ -180,24 +177,19 @@ public class Seed implements CommandLineRunner {
                                 locatie15,
                                 locatie16, locatie17, locatie18));
 
-                Role admin = new Role("ADMIN");
-                Role user = new Role("USER");
-
                 UserEntity user1 = new UserEntity("admin",
                                 "$2a$12$.XkLZQ8Zdwl.2T9WLhoXBe5obkk6U5DQ3Qg6GVfK4pQ.QgccoYACy",
-                                Arrays.asList(user, admin));
+                                Roles.ADMIN);
                 UserEntity user2 = new UserEntity("user",
-                                "$2a$12$30FxlwGA7AUSgeVnI8bNSOOQRGiZ7Pt3Jn9erKsFKXqW8q5yYezJi", Arrays.asList(user));
+                                "$2a$12$30FxlwGA7AUSgeVnI8bNSOOQRGiZ7Pt3Jn9erKsFKXqW8q5yYezJi", Roles.USER);
                 UserEntity user3 = new UserEntity("piet",
-                                "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q", Arrays.asList(user));
+                                "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q", Roles.USER);
                 UserEntity user4 = new UserEntity("jan", "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q",
-                                Arrays.asList(user));
+                                Roles.USER);
                 UserEntity user5 = new UserEntity("jef", "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q",
-                                Arrays.asList(user, admin));
+                                Roles.ADMIN);
 
                 userRepo.saveAllAndFlush(Arrays.asList(user1, user2, user3, user4, user5));
-
-                roleRepo.saveAllAndFlush(Arrays.asList(admin, user));
 
         }
 
