@@ -38,38 +38,32 @@ public class BibliotheekController {
     @Autowired
     private UserRepository userRepository;
 
+    @ModelAttribute("user")
+    public UserEntity getUser(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return userRepository.findByUsername(auth.getName());
+    }
+
     @GetMapping(value = "/catalogus")
     public String toonCatalogus(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserEntity user = userRepository.findByUsername(auth.getName());
-        model.addAttribute("user", user);
         model.addAttribute("listBoeken", boekRepo.findAll());
         return "catalogus";
     }
 
     @GetMapping("/favorieten")
     public String toonFavorieten(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserEntity user = userRepository.findByUsername(auth.getName());
-        model.addAttribute("user", user);
         model.addAttribute("listBoeken", boekRepo.findMostPopular());
         return "favorieten";
     }
 
-    @GetMapping("/detail/{isbn}")
+    @GetMapping("/catalogus/{isbn}")
     public String toonDetail(@PathVariable(value = "isbn") String isbn, Model model) {
         model.addAttribute("boek", boekRepo.findByIsbn(isbn));
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserEntity user = userRepository.findByUsername(auth.getName());
-        model.addAttribute("user", user);
         return "detail_boek";
     }
 
     @GetMapping("/nieuwBoek")
     public String nieuwBoek(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserEntity user = userRepository.findByUsername(auth.getName());
-        model.addAttribute("user", user);
         model.addAttribute("boek", new Boek());
         return "nieuw_boek";
     }
