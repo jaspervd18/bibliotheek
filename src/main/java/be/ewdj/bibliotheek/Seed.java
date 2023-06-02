@@ -2,29 +2,35 @@ package be.ewdj.bibliotheek;
 
 import java.util.Arrays;
 
+import org.hibernate.mapping.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import be.ewdj.bibliotheek.models.Auteur;
 import be.ewdj.bibliotheek.models.Boek;
 import be.ewdj.bibliotheek.models.Locatie;
-import be.ewdj.bibliotheek.repository.AuteurRepository;
-import be.ewdj.bibliotheek.repository.BoekRepository;
-import be.ewdj.bibliotheek.repository.LocatieRepository;
+import be.ewdj.bibliotheek.models.Role;
+import be.ewdj.bibliotheek.models.UserEntity;
+import be.ewdj.bibliotheek.repository.*;
 
 @Component
 public class Seed implements CommandLineRunner {
 
-        private final BoekRepository boekRepo;
-        private final AuteurRepository auteurRepo;
-        private final LocatieRepository locatieRepo;
+        @Autowired
+        private BoekRepository boekRepo;
 
-        public Seed(BoekRepository boekRepo, AuteurRepository auteurRepo,
-                        LocatieRepository locatieRepo) {
-                this.boekRepo = boekRepo;
-                this.auteurRepo = auteurRepo;
-                this.locatieRepo = locatieRepo;
-        }
+        @Autowired
+        private AuteurRepository auteurRepo;
+
+        @Autowired
+        private LocatieRepository locatieRepo;
+
+        @Autowired
+        private RoleRepository roleRepo;
+
+        @Autowired
+        private UserRepository userRepo;
 
         @Override
         public void run(String... args) throws Exception {
@@ -174,6 +180,20 @@ public class Seed implements CommandLineRunner {
                                 locatie7, locatie8, locatie9, locatie10, locatie11, locatie12, locatie13, locatie14,
                                 locatie15,
                                 locatie16, locatie17, locatie18));
+
+                Role admin = new Role("ADMIN");
+                Role user = new Role("USER");
+
+                UserEntity user1 = new UserEntity("admin", "admin", Arrays.asList(user, admin));
+                UserEntity user2 = new UserEntity("user", "user", Arrays.asList(user));
+                UserEntity user3 = new UserEntity("piet", "1234", Arrays.asList(user));
+                UserEntity user4 = new UserEntity("jan", "1234", Arrays.asList(user));
+                UserEntity user5 = new UserEntity("jef", "1234", Arrays.asList(user, admin));
+
+                userRepo.saveAllAndFlush(Arrays.asList(user1, user2, user3, user4, user5));
+
+                roleRepo.saveAllAndFlush(Arrays.asList(admin, user));
+
         }
 
 }
