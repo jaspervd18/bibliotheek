@@ -1,6 +1,5 @@
-package be.ewdj.bibliotheek.locatie;
+package be.ewdj.bibliotheek.models;
 
-import be.ewdj.bibliotheek.boek.Boek;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

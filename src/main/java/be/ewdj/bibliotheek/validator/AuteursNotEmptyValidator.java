@@ -2,7 +2,7 @@ package be.ewdj.bibliotheek.validator;
 
 import java.util.List;
 
-import be.ewdj.bibliotheek.auteur.Auteur;
+import be.ewdj.bibliotheek.models.Auteur;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

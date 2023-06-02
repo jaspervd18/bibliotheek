@@ -1,10 +1,12 @@
-package be.ewdj.bibliotheek.boek;
+package be.ewdj.bibliotheek.repository;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
+import be.ewdj.bibliotheek.models.Boek;
 
 public interface BoekRepository extends JpaRepository<Boek, Long> {
 

@@ -5,12 +5,12 @@ import java.util.Arrays;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import be.ewdj.bibliotheek.auteur.Auteur;
-import be.ewdj.bibliotheek.auteur.AuteurRepository;
-import be.ewdj.bibliotheek.boek.Boek;
-import be.ewdj.bibliotheek.boek.BoekRepository;
-import be.ewdj.bibliotheek.locatie.Locatie;
-import be.ewdj.bibliotheek.locatie.LocatieRepository;
+import be.ewdj.bibliotheek.models.Auteur;
+import be.ewdj.bibliotheek.models.Boek;
+import be.ewdj.bibliotheek.models.Locatie;
+import be.ewdj.bibliotheek.repository.AuteurRepository;
+import be.ewdj.bibliotheek.repository.BoekRepository;
+import be.ewdj.bibliotheek.repository.LocatieRepository;
 
 @Component
 public class Seed implements CommandLineRunner {

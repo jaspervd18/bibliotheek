@@ -1,4 +1,4 @@
-package be.ewdj.bibliotheek.user;
+package be.ewdj.bibliotheek.models;
 
 import java.util.ArrayList;
 import java.util.List;

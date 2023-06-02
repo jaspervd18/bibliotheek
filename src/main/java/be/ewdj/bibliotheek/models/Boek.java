@@ -1,4 +1,4 @@
-package be.ewdj.bibliotheek.boek;
+package be.ewdj.bibliotheek.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,6 @@ import java.util.List;
 import org.hibernate.validator.constraints.ISBN;
 import org.springframework.format.annotation.NumberFormat;
 
-import be.ewdj.bibliotheek.auteur.Auteur;
-import be.ewdj.bibliotheek.locatie.Locatie;
 import be.ewdj.bibliotheek.validator.AuteursNotEmpty;
 import be.ewdj.bibliotheek.validator.LocatiesNotEmpty;
 import jakarta.persistence.*;

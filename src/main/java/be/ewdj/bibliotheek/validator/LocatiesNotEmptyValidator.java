@@ -2,7 +2,7 @@ package be.ewdj.bibliotheek.validator;
 
 import java.util.List;
 
-import be.ewdj.bibliotheek.locatie.Locatie;
+import be.ewdj.bibliotheek.models.Locatie;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

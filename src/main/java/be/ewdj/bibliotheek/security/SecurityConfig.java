@@ -1,4 +1,4 @@
-package be.ewdj.bibliotheek;
+package be.ewdj.bibliotheek.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

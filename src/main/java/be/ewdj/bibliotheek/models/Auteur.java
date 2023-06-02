@@ -1,8 +1,7 @@
-package be.ewdj.bibliotheek.auteur;
+package be.ewdj.bibliotheek.models;
 
 import java.util.List;
 
-import be.ewdj.bibliotheek.boek.Boek;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
