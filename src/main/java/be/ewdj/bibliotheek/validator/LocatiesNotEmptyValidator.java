@@ -13,7 +13,22 @@ public class LocatiesNotEmptyValidator implements ConstraintValidator<LocatiesNo
 
     @Override
     public boolean isValid(List<Locatie> objects, ConstraintValidatorContext context) {
-        return objects != null && !objects.isEmpty();
+        if (objects == null || objects.isEmpty()) {
+            return false;
+        }
+
+        for (Locatie locatie : objects) {
+            if (locatie != null && isValidLocatie(locatie)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isValidLocatie(Locatie locatie) {
+        return locatie.getCode1() != 0 && locatie.getCode2() != 0
+                && locatie.getPlaatsnaam() != null && !locatie.getPlaatsnaam().isEmpty();
     }
 
 }

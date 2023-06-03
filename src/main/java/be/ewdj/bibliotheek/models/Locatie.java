@@ -5,7 +5,11 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "locaties")
 public class Locatie {
@@ -22,8 +26,8 @@ public class Locatie {
   @Max(300)
   private int code2;
 
-  @NotBlank
-  @Pattern(regexp = "[A-Z][a-z]+")
+  @NotBlank(message = "{locatie.plaatsnaam.verplicht}")
+  @Pattern(regexp = "[A-Z][a-z]+", message = "{locatie.plaatsnaam.patroon}")
   private String plaatsnaam;
 
   @ManyToOne
@@ -36,46 +40,6 @@ public class Locatie {
   }
 
   public Locatie() {
-  }
-
-  public int getCode1() {
-    return code1;
-  }
-
-  public void setCode1(int code1) {
-    this.code1 = code1;
-  }
-
-  public int getCode2() {
-    return code2;
-  }
-
-  public void setCode2(int code2) {
-    this.code2 = code2;
-  }
-
-  public String getPlaatsnaam() {
-    return plaatsnaam;
-  }
-
-  public void setPlaatsnaam(String plaatsnaam) {
-    this.plaatsnaam = plaatsnaam;
-  }
-
-  public Boek getBoek() {
-    return boek;
-  }
-
-  public void setBoek(Boek boek) {
-    this.boek = boek;
-  }
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
   }
 
   @Override

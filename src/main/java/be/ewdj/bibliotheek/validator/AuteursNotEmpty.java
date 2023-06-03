@@ -15,7 +15,7 @@ import jakarta.validation.Payload;
 @Retention(RUNTIME)
 public @interface AuteursNotEmpty {
 
-    String message() default "{auters.lijst.nietLeeg}";
+    String message() default "{auteurs.lijst.nietLeeg}";
 
     Class<?>[] groups() default {};
 

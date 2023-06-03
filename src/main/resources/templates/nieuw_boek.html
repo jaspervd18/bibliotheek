@@ -7,7 +7,7 @@
   </head>
   <body class="bg-slate-50">
     <div
-      class="max-w-screen-lg mx-auto px-4 drop-shadow-lg bg-white pb-4 h-screen"
+      class="max-w-screen-lg min-h-fit mx-auto px-4 drop-shadow-lg bg-white pb-4"
     >
       <header
         class="flex items-center px-4 py-8 bg-blue-500 rounded-b-lg shadow"
@@ -66,14 +66,19 @@
             th:placeholder="#{titel}"
             th:field="*{titel}"
             id="titel"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+            class="border rounded px-2 py-1 text-gray-600"
           />
+          <span
+            th:if="${#fields.hasErrors('titel')}"
+            th:errors="*{titel}"
+            class="text-red-500 text-sm"
+          ></span>
         </div>
 
         <div class="flex gap-2">
           <div class="flex flex-col gap-1 w-3/4">
             <label
-              for="titel"
+              for="isbn"
               class="text-gray-600"
               th:text="|#{isbn}:|"
             ></label>
@@ -81,10 +86,17 @@
               type="text"
               th:placeholder="#{isbn}"
               th:field="*{isbn}"
-              id="titel"
-              class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+              id="isbn"
+              class="border rounded px-2 py-1 text-gray-600"
             />
+            <span
+              th:if="${#fields.hasErrors('isbn')}"
+              th:errors="*{isbn}"
+              class="text-red-500 text-sm"
+            >
+            </span>
           </div>
+
           <div class="flex flex-col gap-1 w-1/4">
             <label
               for="prijs"
@@ -92,32 +104,49 @@
               th:text="|#{prijs}:|"
             ></label>
             <input
-              type="number"
+              type="text"
               th:placeholder="#{prijs}"
               th:field="*{aankoopPrijs}"
               id="prijs"
-              min="0"
-              step="0.01"
-              class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+              class="border rounded px-2 py-1 text-gray-600"
             />
+            <div
+              th:if="${#fields.hasErrors('aankoopPrijs')}"
+              class="text-red-500 text-sm"
+            >
+              <span th:errors="*{aankoopPrijs}"></span>
+            </div>
           </div>
         </div>
 
-        <p th:text="|#{auteurs}:|" class="text-gray-600 mt-4"></p>
+        <label
+          for="auteurs"
+          th:text="|#{auteurs}:|"
+          class="text-gray-600 mt-4"
+        ></label>
 
         <div class="flex gap-2 items-center">
           <input
             type="text"
             th:field="*{auteurs[0].voornaam}"
             th:placeholder="|#{voornaam} 1|"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+            id="auteurs"
+            class="border rounded px-2 py-1 text-gray-600"
           />
           <input
             type="text"
             th:field="*{auteurs[0].naam}"
             th:placeholder="|#{achternaam} 1|"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+            id="auteurs"
+            class="border rounded px-2 py-1 text-gray-600"
           />
+        </div>
+
+        <div
+          th:if="${#fields.hasErrors('auteurs') && !#fields.hasErrors('auteurs[0]')}"
+          class="text-red-500 text-sm"
+        >
+          <span th:errors="*{auteurs}"></span>
         </div>
 
         <div class="flex gap-2 items-center">
@@ -125,13 +154,15 @@
             type="text"
             th:field="*{auteurs[1].voornaam}"
             th:placeholder="|#{voornaam} 2|"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+            id="auteurs"
+            class="border rounded px-2 py-1 text-gray-600"
           />
           <input
             type="text"
             th:field="*{auteurs[1].naam}"
             th:placeholder="|#{achternaam} 2|"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+            id="auteurs"
+            class="border rounded px-2 py-1 text-gray-600"
           />
         </div>
 
@@ -140,74 +171,113 @@
             type="text"
             th:field="*{auteurs[2].voornaam}"
             th:placeholder="|#{voornaam} 3|"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+            id="auteurs"
+            class="border rounded px-2 py-1 text-gray-600"
           />
           <input
             type="text"
             th:field="*{auteurs[2].naam}"
             th:placeholder="|#{achternaam} 3|"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+            id="auteurs"
+            class="border rounded px-2 py-1 text-gray-600"
           />
         </div>
 
-        <p th:text="|#{locaties}:|" class="text-gray-600 mt-4"></p>
+        <label
+          for="locaties"
+          th:text="|#{locaties}:|"
+          class="text-gray-600 mt-4"
+        ></label>
 
         <div class="flex gap-2 items-center">
           <input
             type="text"
             th:field="*{locaties[0].code1}"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
+            id="locaties"
+            class="border rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
             type="text"
             th:field="*{locaties[0].code2}"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
+            id="locaties"
+            class="border rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
             type="text"
             th:field="*{locaties[0].plaatsnaam}"
             th:placeholder="|#{plaatsnaam} 1|"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+            id="locaties"
+            class="border rounded px-2 py-1 text-gray-600"
           />
         </div>
+
+        <div
+          th:if="${#fields.hasErrors('locaties') && !#fields.hasErrors('locaties[0]')}"
+          class="text-red-500 text-sm"
+        >
+          <span th:errors="*{locaties}"></span>
+        </div>
+        <span
+          th:if="${#fields.hasErrors('locaties[0].code1') || #fields.hasErrors('locaties[0].code2') || #fields.hasErrors('locaties[0].plaatsnaam')}"
+          th:errors="*{locaties[0]}"
+          class="text-red-500"
+        ></span>
 
         <div class="flex gap-2 items-center">
           <input
             type="text"
             th:field="*{locaties[1].code1}"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
+            id="locaties"
+            class="border rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
             type="text"
             th:field="*{locaties[1].code2}"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
+            id="locaties"
+            class="border rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
             type="text"
             th:field="*{locaties[1].plaatsnaam}"
             th:placeholder="|#{plaatsnaam} 2|"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+            id="locaties"
+            class="border rounded px-2 py-1 text-gray-600"
           />
         </div>
+
+        <span
+          th:if="${#fields.hasErrors('locaties[1].code1') || #fields.hasErrors('locaties[1].code2') || #fields.hasErrors('locaties[1].plaatsnaam')}"
+          th:errors="*{locaties[1]}"
+          class="text-red-500"
+        ></span>
 
         <div class="flex gap-2 items-center">
           <input
             type="text"
             th:field="*{locaties[2].code1}"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
+            id="locaties"
+            class="border rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
             type="text"
             th:field="*{locaties[2].code2}"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600 w-16"
+            id="locaties"
+            class="border rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
             type="text"
             th:field="*{locaties[2].plaatsnaam}"
             th:placeholder="|#{plaatsnaam} 3|"
-            class="border border-gray-600 rounded px-2 py-1 text-gray-600"
+            id="locaties"
+            class="border rounded px-2 py-1 text-gray-600"
           />
         </div>
+
+        <span
+          th:if="${#fields.hasErrors('locaties[2].code1') || #fields.hasErrors('locaties[2].code2') || #fields.hasErrors('locaties[2].plaatsnaam')}"
+          th:errors="*{locaties[2]}"
+          class="text-red-500"
+        ></span>
 
         <button
           type="submit"

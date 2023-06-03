@@ -13,7 +13,22 @@ public class AuteursNotEmptyValidator implements ConstraintValidator<AuteursNotE
 
     @Override
     public boolean isValid(List<Auteur> objects, ConstraintValidatorContext context) {
-        return objects != null && !objects.isEmpty();
+        if (objects == null || objects.isEmpty()) {
+            return false;
+        }
+
+        for (Auteur auteur : objects) {
+            if (auteur != null && isValidAuteur(auteur)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isValidAuteur(Auteur auteur) {
+        return auteur.getNaam() != null && !auteur.getNaam().isEmpty()
+                && auteur.getVoornaam() != null && !auteur.getVoornaam().isEmpty();
     }
 
 }
