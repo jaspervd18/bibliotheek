@@ -10,30 +10,26 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private CustomUserDetailsService userDetailsService;
-
     @Autowired
-    public SecurityConfig(CustomUserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+    private CustomUserDetailsService userDetailsService;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .exceptionHandling()
-                .accessDeniedPage("/403")
-                .and()
+                .csrf(withDefaults())
                 .authorizeHttpRequests((requests) -> {
                     requests.requestMatchers("/*").permitAll();
                     requests.requestMatchers("/*/*").permitAll();
+                    requests.requestMatchers("/*/*/*").permitAll();
                 })
                 .formLogin(form -> form.defaultSuccessUrl("/catalogus", true))
-                .httpBasic();
+                .exceptionHandling(handling -> handling.accessDeniedPage("/403"));
 
         return http.build();
     }
