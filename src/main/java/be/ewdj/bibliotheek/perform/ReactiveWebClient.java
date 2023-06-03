@@ -20,12 +20,19 @@ public class ReactiveWebClient {
     }
 
     private void getBooksByAuthor(String auteurNaam, String auteurVoornaam) {
-        webClient.get().uri("auteur/" + auteurNaam + "/" +
-                auteurVoornaam).retrieve().bodyToFlux(Boek.class)
+        webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/auteur")
+                        .queryParam("auteurNaam", auteurNaam)
+                        .queryParam("auteurVoornaam", auteurVoornaam)
+                        .build())
+                .retrieve()
+                .bodyToFlux(Boek.class)
                 .flatMap(boek -> {
                     System.out.println(boek);
                     return Mono.empty();
-                }).blockLast();
+                })
+                .blockLast();
     }
 
 }

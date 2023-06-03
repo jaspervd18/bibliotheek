@@ -107,7 +107,7 @@ public class BibliotheekController {
         userRepository.save(user);
 
         model.addAttribute("boek", boek);
-        return "redirect:/";
+        return "redirect:/catalogus";
     }
 
     @GetMapping("/catalogus/new")
@@ -154,12 +154,12 @@ public class BibliotheekController {
         Optional<Boek> existingBoek = boekRepo.findByIsbn(boek.getIsbn());
         if (existingBoek.isPresent()) {
             boekRepo.updateBookFields(boek.getIsbn(), boek.getTitel(), boek.getAankoopPrijs());
-            return "redirect:/";
+            return "redirect:/catalogus";
         } else {
             boekRepo.save(boek);
         }
         locatieRepo.saveAllAndFlush(boek.getLocaties());
-        return "redirect:/";
+        return "redirect:/catalogus";
     }
 
 }

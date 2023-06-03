@@ -27,7 +27,7 @@ public interface BoekRepository extends JpaRepository<Boek, Long> {
 
   @Modifying
   @Transactional
-  @Query("UPDATE Boek b SET b.titel = :titel, b.aankoopPrijs = :aankoopPrijs, b.locaties = :locaties, b.auteurs = :auteurs WHERE b.isbn = :isbn")
+  @Query("UPDATE Boek b SET b.titel = :titel, b.aankoopPrijs = :aankoopPrijs WHERE b.isbn = :isbn")
   void updateBookFields(@Param("isbn") String isbn, @Param("titel") String titel,
       @Param("aankoopPrijs") double aankoopPrijs);
 
