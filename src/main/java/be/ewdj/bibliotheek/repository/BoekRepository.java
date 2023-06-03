@@ -25,14 +25,6 @@ public interface BoekRepository extends JpaRepository<Boek, Long> {
   @Query("SELECT b FROM Boek b JOIN b.auteurs a WHERE a.naam LIKE ?1 OR a.voornaam LIKE ?1")
   List<Boek> findBooksByAuthor(Auteur auteur);
 
-  // @Modifying
-  // @Transactional
-  // @Query("UPDATE Boek b SET b.titel = :titel, b.aankoopPrijs = :aankoopPrijs
-  // WHERE b.isbn = :isbn")
-  // void updateBookFields(@Param("isbn") String isbn, @Param("titel") String
-  // titel,
-  // @Param("aankoopPrijs") double aankoopPrijs);
-
   @Modifying
   @Transactional
   @Query("UPDATE Boek b SET b.titel = :titel, b.aankoopPrijs = :aankoopPrijs, b.locaties = :locaties, b.auteurs = :auteurs WHERE b.isbn = :isbn")

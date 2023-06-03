@@ -27,6 +27,8 @@ public class SecurityConfig {
                     requests.requestMatchers("/*").permitAll();
                     requests.requestMatchers("/*/*").permitAll();
                     requests.requestMatchers("/*/*/*").permitAll();
+                    requests.anyRequest().authenticated();
+
                 })
                 .formLogin(form -> form.defaultSuccessUrl("/catalogus", true))
                 .exceptionHandling(handling -> handling.accessDeniedPage("/403"));
