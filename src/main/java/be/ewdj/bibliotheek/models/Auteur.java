@@ -4,7 +4,11 @@ import java.util.List;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "auteurs")
 public class Auteur {
@@ -28,30 +32,6 @@ public class Auteur {
   }
 
   public Auteur() {
-  }
-
-  public String getNaam() {
-    return naam;
-  }
-
-  public void setNaam(String naam) {
-    this.naam = naam;
-  }
-
-  public String getVoornaam() {
-    return voornaam;
-  }
-
-  public void setVoornaam(String voornaam) {
-    this.voornaam = voornaam;
-  }
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
   }
 
   @Override
