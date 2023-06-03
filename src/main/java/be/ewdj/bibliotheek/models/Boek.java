@@ -12,7 +12,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "boeken")
 public class Boek {
@@ -43,7 +47,7 @@ public class Boek {
 
   @OneToMany(mappedBy = "boek")
   @LocatiesNotEmpty
-  private List<Locatie> locaties = new ArrayList<>();
+  private List<Locatie> locaties = new ArrayList<>(3);
 
   public Boek(String titel, String isbn, double aankoopPrijs) {
     this.titel = titel;
@@ -53,62 +57,6 @@ public class Boek {
   }
 
   public Boek() {
-  }
-
-  public String getTitel() {
-    return titel;
-  }
-
-  public void setTitel(String titel) {
-    this.titel = titel;
-  }
-
-  public String getIsbn() {
-    return isbn;
-  }
-
-  public void setIsbn(String isbn) {
-    this.isbn = isbn;
-  }
-
-  public double getAankoopPrijs() {
-    return aankoopPrijs;
-  }
-
-  public void setAankoopPrijs(double aankoopPrijs) {
-    this.aankoopPrijs = aankoopPrijs;
-  }
-
-  public int getAantalSterren() {
-    return aantalSterren;
-  }
-
-  public void setAantalSterren(int aantalSterren) {
-    this.aantalSterren = aantalSterren;
-  }
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
-
-  public List<Auteur> getAuteurs() {
-    return auteurs;
-  }
-
-  public void setAuteurs(List<Auteur> auteurs) {
-    this.auteurs = auteurs;
-  }
-
-  public List<Locatie> getLocaties() {
-    return locaties;
-  }
-
-  public void setLocaties(List<Locatie> locaties) {
-    this.locaties = locaties;
   }
 
   public void addAuteur(Auteur auteur) {
