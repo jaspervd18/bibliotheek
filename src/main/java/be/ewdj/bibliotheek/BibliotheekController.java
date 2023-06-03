@@ -8,10 +8,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import be.ewdj.bibliotheek.models.Auteur;
 import be.ewdj.bibliotheek.models.Boek;
@@ -69,7 +71,11 @@ public class BibliotheekController {
     }
 
     @PostMapping("/nieuwBoek")
-    public String saveNieuwBoek(@Valid @ModelAttribute("boek") Boek boek) {
+    public String handleSave(@Valid Boek boek, BindingResult result, RedirectAttributes redirectAttributes,
+            Model model) {
+        if (result.hasErrors()) {
+            return "nieuw_boek";
+        }
         Iterator<Auteur> itrAuteurs = boek.getAuteurs().iterator();
         while (itrAuteurs.hasNext()) {
             Auteur auteur = itrAuteurs.next();
