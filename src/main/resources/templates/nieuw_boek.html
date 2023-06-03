@@ -193,12 +193,14 @@
           <input
             type="text"
             th:field="*{locaties[0].code1}"
+            th:placeholder="|#{code} 1A|"
             id="locaties"
             class="border rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
             type="text"
             th:field="*{locaties[0].code2}"
+            th:placeholder="|#{code} 1B|"
             id="locaties"
             class="border rounded px-2 py-1 text-gray-600 w-16"
           />
@@ -217,22 +219,19 @@
         >
           <span th:errors="*{locaties}"></span>
         </div>
-        <span
-          th:if="${#fields.hasErrors('locaties[0].code1') || #fields.hasErrors('locaties[0].code2') || #fields.hasErrors('locaties[0].plaatsnaam')}"
-          th:errors="*{locaties[0]}"
-          class="text-red-500"
-        ></span>
 
         <div class="flex gap-2 items-center">
           <input
             type="text"
             th:field="*{locaties[1].code1}"
+            th:placeholder="|#{code} 2A|"
             id="locaties"
             class="border rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
             type="text"
             th:field="*{locaties[1].code2}"
+            th:placeholder="|#{code} 2B|"
             id="locaties"
             class="border rounded px-2 py-1 text-gray-600 w-16"
           />
@@ -245,22 +244,18 @@
           />
         </div>
 
-        <span
-          th:if="${#fields.hasErrors('locaties[1].code1') || #fields.hasErrors('locaties[1].code2') || #fields.hasErrors('locaties[1].plaatsnaam')}"
-          th:errors="*{locaties[1]}"
-          class="text-red-500"
-        ></span>
-
         <div class="flex gap-2 items-center">
           <input
             type="text"
             th:field="*{locaties[2].code1}"
+            th:placeholder="|#{code} 3A|"
             id="locaties"
             class="border rounded px-2 py-1 text-gray-600 w-16"
           />
           <input
             type="text"
             th:field="*{locaties[2].code2}"
+            th:placeholder="|#{code} 3B|"
             id="locaties"
             class="border rounded px-2 py-1 text-gray-600 w-16"
           />
@@ -272,12 +267,6 @@
             class="border rounded px-2 py-1 text-gray-600"
           />
         </div>
-
-        <span
-          th:if="${#fields.hasErrors('locaties[2].code1') || #fields.hasErrors('locaties[2].code2') || #fields.hasErrors('locaties[2].plaatsnaam')}"
-          th:errors="*{locaties[2]}"
-          class="text-red-500"
-        ></span>
 
         <button
           type="submit"
