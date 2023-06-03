@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import be.ewdj.bibliotheek.models.Auteur;
@@ -48,7 +50,8 @@ public class BibliotheekController {
     @ModelAttribute("user")
     public UserEntity getUser(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return userRepository.findByUsername(auth.getName());
+        Optional<UserEntity> optionalUser = userRepository.findByUsername(auth.getName());
+        return optionalUser.orElse(null);
     }
 
     @GetMapping(value = "/catalogus")
@@ -74,6 +77,35 @@ public class BibliotheekController {
 
         model.addAttribute("boek", boek);
         return "detail_boek";
+    }
+
+    @PostMapping("/catalogus/{isbn}/favoriet")
+    public String favoriet(@PathVariable(value = "isbn") String isbn, Model model) {
+        Optional<Boek> optionalBoek = boekRepo.findByIsbn(isbn);
+        Boek boek = optionalBoek.orElse(null);
+
+        if (boek == null) {
+            return "error_page";
+        }
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Optional<UserEntity> optionalUser = userRepository.findByUsername(auth.getName());
+        UserEntity user = optionalUser.orElse(null);
+
+        if (user == null) {
+            return "error_page";
+        }
+
+        if (user.getFavorieten().contains(boek)) {
+            user.removeFavoriet(boek);
+        } else {
+            user.addFavoriet(boek);
+        }
+
+        userRepository.save(user);
+
+        model.addAttribute("boek", boek);
+        return "redirect:/";
     }
 
     @GetMapping("/nieuwBoek")

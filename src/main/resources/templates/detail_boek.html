@@ -61,13 +61,40 @@
           class="text-gray-600 mb-4"
         ></p>
         <p th:text="|#{locaties}:|" class="text-gray-600"></p>
-        <ul class="list-disc ml-8 text-gray-600">
+        <ul class="list-disc ml-8 text-gray-600 mb-4">
           <li
             th:each="locatie : ${boek.locaties}"
             th:text="${locatie}"
             class="text-gray-600"
           ></li>
         </ul>
+        <form
+          th:action="@{/catalogus/{isbn}/favoriet(isbn=${boek.isbn})}"
+          method="post"
+        >
+          <span
+            th:if="${user.isMaxFavoritesReached() && !user.favorieten.contains(boek)}"
+            th:text="#{favoriet.maximum}"
+            class="border bg-blue-500 text-white px-4 py-2 rounded mt-4 cursor-not-allowed"
+          >
+          </span>
+          <span th:if="${user.favorieten.contains(boek)}">
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer"
+              th:text="#{favoriet.verwijderen}"
+            ></button>
+          </span>
+          <span
+            th:if="${!user.isMaxFavoritesReached() && !user.favorieten.contains(boek)}"
+          >
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer"
+              th:text="#{favoriet.toevoegen}"
+            ></button>
+          </span>
+        </form>
       </div>
     </div>
   </body>
