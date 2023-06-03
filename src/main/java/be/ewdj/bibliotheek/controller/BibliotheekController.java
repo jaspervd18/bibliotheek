@@ -1,9 +1,11 @@
-package be.ewdj.bibliotheek;
+package be.ewdj.bibliotheek.controller;
 
 import java.util.Iterator;
-import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -40,6 +42,9 @@ public class BibliotheekController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private MessageSource messageSource;
+
     @ModelAttribute("user")
     public UserEntity getUser(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -60,7 +65,14 @@ public class BibliotheekController {
 
     @GetMapping("/catalogus/{isbn}")
     public String toonDetail(@PathVariable(value = "isbn") String isbn, Model model) {
-        model.addAttribute("boek", boekRepo.findByIsbn(isbn));
+        Optional<Boek> optionalBoek = boekRepo.findByIsbn(isbn);
+        Boek boek = optionalBoek.orElse(null);
+
+        if (boek == null) {
+            return "error_page";
+        }
+
+        model.addAttribute("boek", boek);
         return "detail_boek";
     }
 
@@ -76,27 +88,41 @@ public class BibliotheekController {
         if (result.hasErrors()) {
             return "nieuw_boek";
         }
+
+        Optional<Boek> existingBoek = boekRepo.findByIsbn(boek.getIsbn());
+        if (existingBoek.isPresent()) {
+            String errorMessage = messageSource.getMessage("isbn.bestaat", null, Locale.getDefault());
+            result.rejectValue("isbn", "error.isbn", errorMessage);
+            return "nieuw_boek";
+        }
+
         Iterator<Auteur> itrAuteurs = boek.getAuteurs().iterator();
         while (itrAuteurs.hasNext()) {
             Auteur auteur = itrAuteurs.next();
-            if (auteur.getNaam() == null || auteur.getNaam().equals("") ||
-                    auteur.getVoornaam() == null
-                    || auteur.getVoornaam().equals("")) {
+            if (auteur.getNaam() == null || auteur.getNaam().isEmpty() ||
+                    auteur.getVoornaam() == null || auteur.getVoornaam().isEmpty()) {
                 itrAuteurs.remove();
             } else {
-                auteurRepo.save(auteur);
+                Auteur existingAuteur = auteurRepo.findByNaamAndVoornaam(auteur.getNaam(), auteur.getVoornaam());
+                if (existingAuteur == null) {
+                    auteurRepo.save(auteur);
+                } else {
+                    auteur.setId(existingAuteur.getId());
+                }
             }
         }
+
         Iterator<Locatie> itrLocaties = boek.getLocaties().iterator();
         while (itrLocaties.hasNext()) {
             Locatie locatie = itrLocaties.next();
-            if (locatie.getCode1() == 0 || locatie.getCode2() == 0 || locatie.getPlaatsnaam() == null
-                    || locatie.getPlaatsnaam().equals("")) {
+            if (locatie.getCode1() == 0 || locatie.getCode2() == 0 || locatie.getPlaatsnaam() == null ||
+                    locatie.getPlaatsnaam().isEmpty()) {
                 itrLocaties.remove();
             } else {
                 locatie.setBoek(boek);
             }
         }
+
         boekRepo.save(boek);
         locatieRepo.saveAllAndFlush(boek.getLocaties());
         return "redirect:/";
