@@ -27,6 +27,7 @@ import be.ewdj.bibliotheek.repository.AuteurRepository;
 import be.ewdj.bibliotheek.repository.BoekRepository;
 import be.ewdj.bibliotheek.repository.LocatieRepository;
 import be.ewdj.bibliotheek.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @Controller
@@ -60,7 +61,7 @@ public class BibliotheekController {
         return "catalogus";
     }
 
-    @GetMapping("/favorieten")
+    @GetMapping("/catalogus/favorieten")
     public String toonFavorieten(Model model) {
         model.addAttribute("listBoeken", boekRepo.findMostPopular());
         return "favorieten";
@@ -75,8 +76,12 @@ public class BibliotheekController {
             return "error_page";
         }
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Optional<UserEntity> optionalUser = userRepository.findByUsername(auth.getName());
+        UserEntity user = optionalUser.orElse(null);
+
         model.addAttribute("boek", boek);
-        return "detail_boek";
+        return user.getRole().toString() == "USER" ? "detail_boek" : "edit_boek";
     }
 
     @PostMapping("/catalogus/{isbn}/favoriet")
@@ -108,24 +113,18 @@ public class BibliotheekController {
         return "redirect:/";
     }
 
-    @GetMapping("/nieuwBoek")
+    @GetMapping("/catalogus/new")
     public String nieuwBoek(Model model) {
         model.addAttribute("boek", new Boek());
-        return "nieuw_boek";
+        return "edit_boek";
     }
 
-    @PostMapping("/nieuwBoek")
+    @Transactional
+    @PostMapping("/catalogus/save")
     public String handleSave(@Valid Boek boek, BindingResult result, RedirectAttributes redirectAttributes,
             Model model) {
         if (result.hasErrors()) {
-            return "nieuw_boek";
-        }
-
-        Optional<Boek> existingBoek = boekRepo.findByIsbn(boek.getIsbn());
-        if (existingBoek.isPresent()) {
-            String errorMessage = messageSource.getMessage("isbn.bestaat", null, Locale.getDefault());
-            result.rejectValue("isbn", "error.isbn", errorMessage);
-            return "nieuw_boek";
+            return "edit_boek";
         }
 
         Iterator<Auteur> itrAuteurs = boek.getAuteurs().iterator();
@@ -155,7 +154,15 @@ public class BibliotheekController {
             }
         }
 
-        boekRepo.save(boek);
+        Optional<Boek> existingBoek = boekRepo.findByIsbn(boek.getIsbn());
+        if (existingBoek.isPresent()) {
+            // boekRepo.updateBookFields(boek.getIsbn(), boek.getTitel(),
+            // boek.getAankoopPrijs());
+            boekRepo.updateBookFieldsWithAssociations(boek.getIsbn(), boek.getTitel(), boek.getAankoopPrijs());
+            return "redirect:/";
+        } else {
+            boekRepo.save(boek);
+        }
         locatieRepo.saveAllAndFlush(boek.getLocaties());
         return "redirect:/";
     }
