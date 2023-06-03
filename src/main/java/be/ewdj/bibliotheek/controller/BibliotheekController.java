@@ -78,7 +78,7 @@ public class BibliotheekController {
     }
 
     @PostMapping("/catalogus/{isbn}/favoriet")
-    public String favoriet(@PathVariable(value = "isbn") String isbn, Model model) {
+    public String favoriet(@PathVariable(value = "isbn") String isbn, RedirectAttributes redirectAttributes) {
         Optional<Boek> optionalBoek = boekRepo.findByIsbn(isbn);
         Boek boek = optionalBoek.orElse(null);
 
@@ -96,13 +96,14 @@ public class BibliotheekController {
 
         if (user.getFavorieten().contains(boek)) {
             user.removeFavoriet(boek);
+            redirectAttributes.addFlashAttribute("message", "favoriet.verwijderd");
         } else {
             user.addFavoriet(boek);
+            redirectAttributes.addFlashAttribute("message", "favoriet.toegevoegd");
         }
 
         userRepository.save(user);
 
-        model.addAttribute("boek", boek);
         return "redirect:/catalogus";
     }
 

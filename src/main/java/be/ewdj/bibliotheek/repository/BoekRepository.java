@@ -10,7 +10,6 @@ import org.springframework.data.repository.query.Param;
 
 import be.ewdj.bibliotheek.models.Auteur;
 import be.ewdj.bibliotheek.models.Boek;
-import be.ewdj.bibliotheek.models.Locatie;
 import jakarta.transaction.Transactional;
 
 public interface BoekRepository extends JpaRepository<Boek, Long> {
@@ -19,7 +18,7 @@ public interface BoekRepository extends JpaRepository<Boek, Long> {
 
   Optional<Boek> findByIsbn(String isbn);
 
-  @Query("SELECT b FROM Boek b ORDER BY b.aantalSterren DESC, b.titel ASC LIMIT 10")
+  @Query("SELECT b FROM Boek b JOIN b.gebruikers u GROUP BY b ORDER BY COUNT(u) DESC, b.titel ASC")
   List<Boek> findMostPopular();
 
   @Query("SELECT b FROM Boek b JOIN b.auteurs a WHERE a.naam LIKE ?1 OR a.voornaam LIKE ?1")

@@ -38,8 +38,6 @@ public class Boek {
   @NumberFormat(pattern = "0.00", style = NumberFormat.Style.NUMBER)
   private double aankoopPrijs;
 
-  private int aantalSterren;
-
   @ManyToMany
   @JoinTable(name = "auteur_boeken", joinColumns = @JoinColumn(name = "boek_id"), inverseJoinColumns = @JoinColumn(name = "auteur_id"))
   @AuteursNotEmpty
@@ -56,7 +54,6 @@ public class Boek {
     this.titel = titel;
     this.isbn = isbn;
     this.aankoopPrijs = aankoopPrijs;
-    this.aantalSterren = 0;
   }
 
   public Boek() {

@@ -56,10 +56,6 @@
           th:text="|#{prijs}: &euro; ${#numbers.formatDecimal(boek.aankoopPrijs, 1, 'POINT', 2, 'COMMA')} |"
           class="text-gray-600 mb-4"
         ></p>
-        <p
-          th:text="|#{sterren}: ${boek.aantalSterren} |"
-          class="text-gray-600 mb-4"
-        ></p>
         <p th:text="|#{locaties}:|" class="text-gray-600"></p>
         <ul class="list-disc ml-8 text-gray-600 mb-4">
           <li
