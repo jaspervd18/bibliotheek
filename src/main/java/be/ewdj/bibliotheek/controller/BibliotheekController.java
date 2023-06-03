@@ -42,9 +42,6 @@ public class BibliotheekController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private MessageSource messageSource;
-
     @ModelAttribute("user")
     public UserEntity getUser(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
