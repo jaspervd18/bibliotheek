@@ -153,9 +153,7 @@ public class BibliotheekController {
 
         Optional<Boek> existingBoek = boekRepo.findByIsbn(boek.getIsbn());
         if (existingBoek.isPresent()) {
-            // boekRepo.updateBookFields(boek.getIsbn(), boek.getTitel(),
-            // boek.getAankoopPrijs());
-            boekRepo.updateBookFieldsWithAssociations(boek.getIsbn(), boek.getTitel(), boek.getAankoopPrijs());
+            boekRepo.updateBookFields(boek.getIsbn(), boek.getTitel(), boek.getAankoopPrijs());
             return "redirect:/";
         } else {
             boekRepo.save(boek);
