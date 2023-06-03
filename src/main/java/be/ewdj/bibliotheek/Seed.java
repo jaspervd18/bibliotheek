@@ -179,15 +179,15 @@ public class Seed implements CommandLineRunner {
 
                 UserEntity user1 = new UserEntity("admin",
                                 "$2a$12$.XkLZQ8Zdwl.2T9WLhoXBe5obkk6U5DQ3Qg6GVfK4pQ.QgccoYACy",
-                                Roles.ADMIN);
+                                Roles.ADMIN, 10);
                 UserEntity user2 = new UserEntity("user",
-                                "$2a$12$30FxlwGA7AUSgeVnI8bNSOOQRGiZ7Pt3Jn9erKsFKXqW8q5yYezJi", Roles.USER);
+                                "$2a$12$30FxlwGA7AUSgeVnI8bNSOOQRGiZ7Pt3Jn9erKsFKXqW8q5yYezJi", Roles.USER, 8);
                 UserEntity user3 = new UserEntity("Piet",
-                                "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q", Roles.USER);
+                                "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q", Roles.USER, 3);
                 UserEntity user4 = new UserEntity("Jan", "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q",
-                                Roles.USER);
+                                Roles.USER, 15);
                 UserEntity user5 = new UserEntity("Jef", "$2a$12$y/t6nv.B2.9lkz1nbPFtgOca7dRREhT/MTSlvqfc3nF5ucH7qYK5q",
-                                Roles.ADMIN);
+                                Roles.ADMIN, 4);
 
                 userRepo.saveAllAndFlush(Arrays.asList(user1, user2, user3, user4, user5));
 

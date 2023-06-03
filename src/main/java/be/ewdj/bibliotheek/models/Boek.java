@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.validator.constraints.ISBN;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.format.annotation.NumberFormat;
 
 import be.ewdj.bibliotheek.validator.AuteursNotEmpty;
@@ -48,6 +49,9 @@ public class Boek {
   @OneToMany(mappedBy = "boek")
   @LocatiesNotEmpty
   private List<Locatie> locaties = new ArrayList<>(3);
+
+  @ManyToMany(mappedBy = "favorieten")
+  private List<UserEntity> gebruikers = new ArrayList<>();
 
   public Boek(String titel, String isbn, double aankoopPrijs) {
     this.titel = titel;
