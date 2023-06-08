@@ -12,20 +12,17 @@ public class ReactiveWebClient {
 
     public ReactiveWebClient() {
         getBookByIsbn("9789403139005");
-        getBooksByAuthor("Van Loo", "Bart");
+        getBooksByAuthor("Rowling");
+
     }
 
     private void getBookByIsbn(String isbn) {
         webClient.get().uri(isbn).retrieve().bodyToMono(Boek.class).doOnSuccess(System.out::println).block();
     }
 
-    private void getBooksByAuthor(String auteurNaam, String auteurVoornaam) {
+    private void getBooksByAuthor(String auteurNaam) {
         webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/auteur")
-                        .queryParam("auteurNaam", auteurNaam)
-                        .queryParam("auteurVoornaam", auteurVoornaam)
-                        .build())
+                .uri("/auteur/{auteurNaam}", auteurNaam)
                 .retrieve()
                 .bodyToFlux(Boek.class)
                 .flatMap(boek -> {

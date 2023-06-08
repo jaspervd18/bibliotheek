@@ -27,6 +27,7 @@ public class SecurityConfig {
                     requests.requestMatchers("/*").permitAll();
                     requests.requestMatchers("/*/*").permitAll();
                     requests.requestMatchers("/*/*/*").permitAll();
+                    requests.requestMatchers("/*/*/*/*").permitAll();
                     requests.anyRequest().authenticated();
 
                 })

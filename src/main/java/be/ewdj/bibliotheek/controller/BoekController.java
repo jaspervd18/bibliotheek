@@ -23,9 +23,9 @@ public class BoekController {
         return boekService.getBookByIsbn(isbn);
     }
 
-    @GetMapping("/auteur")
-    public List<Boek> getBooksByAuthor(@RequestParam("auteurNaam") String auteurNaam,
-            @RequestParam("auteurVoornaam") String auteurVoornaam) {
-        return boekService.getBooksByAuthor(auteurNaam, auteurVoornaam);
+    @GetMapping("/auteur/{auteurNaam}")
+    public List<Boek> getBooksByAuthor(@PathVariable("auteurNaam") String auteurNaam) {
+        return boekService.getBooksByAuthor(auteurNaam);
     }
+
 }

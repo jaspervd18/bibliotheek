@@ -21,8 +21,8 @@ public interface BoekRepository extends JpaRepository<Boek, Long> {
   @Query("SELECT b FROM Boek b JOIN b.gebruikers u GROUP BY b ORDER BY COUNT(u) DESC, b.titel ASC")
   List<Boek> findMostPopular();
 
-  @Query("SELECT b FROM Boek b JOIN b.auteurs a WHERE a.naam LIKE ?1 OR a.voornaam LIKE ?1")
-  List<Boek> findBooksByAuthor(Auteur auteur);
+  @Query("SELECT b FROM Boek b JOIN b.auteurs a WHERE a.naam LIKE %:naam% OR a.voornaam LIKE %:naam%")
+  List<Boek> findBooksByAuthor(@Param("naam") String naam);
 
   @Modifying
   @Transactional
